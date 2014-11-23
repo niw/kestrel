@@ -1,3 +1,7 @@
+import AssemblyKeys._
+
+assemblySettings
+
 com.twitter.sbt.StandardProject.newSettings
 
 com.twitter.scrooge.ScroogeSBT.newSettings
