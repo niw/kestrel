@@ -9,6 +9,14 @@
 
 %define _prefix /opt/kestrel-%{kestrelver}%{?kestrelcommit:-SNAPSHOT}
 
+# Disable brp-java-repack-jars.
+%define __jar_repack %{nil}
+
+# Exclude private libraries.
+# See https://fedoraproject.org/wiki/Packaging:AutoProvidesAndRequiresFiltering
+%define __provides_exclude_from ^%{_prefix}/(libs|scripts)/.*$
+%define __requires_exclude_from ^%{_prefix}/(libs|scripts)/.*$
+
 Summary: Simple, distributed message queue
 Name: kestrel
 Version: %{kestrelver}
@@ -87,6 +95,10 @@ END_OF_FILE
 %dir /var/run/kestrel
 
 %changelog
+* Thu Aug 2 2015 Yoshimasa Niwa <niw@@niw.at>
+- Disable brp-java-repack-jars.
+- Disable auto provides and requires for lib and scripts directories.
+
 * Sat Feb 7 2015 Yoshimasa Niwa <niw@@niw.at>
 - Convert to the template for rpmbuild sbt task.
 
